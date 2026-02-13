@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
 import { Lock, Mail, Eye, EyeOff } from 'lucide-react';
+import { Player } from '@lottiefiles/react-lottie-player';
+import successAnimation from './Login.json';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -166,18 +168,16 @@ export default function Login() {
         </div>
       </div>
 
-      {/* Success GIF Transition Overlay */}
+      {/* Success Lottie Transition Overlay */}
       {showSuccess && (
         <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white transition-opacity duration-500">
-           {/* Replace this src with your actual GIF URL */}
-           <img 
-            src="https://cdn.dribbble.com/users/147386/screenshots/5315437/success-tick-dribbble.gif" 
-            alt="Success" 
-            className="w-64 h-64 object-contain"
+           <Player
+            autoplay
+            loop={false}
+            src={successAnimation}
+            style={{ height: '300px', width: '300px' }}
           />
-          <p className="mt-4 text-xl font-semibold text-gray-800 animate-pulse">
-            Login Successful...
-          </p>
+      
         </div>
       )}
     </div>
