@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axios from 'axios';
 import { Bell, Search, Settings, LogOut, ChevronDown } from 'lucide-react';
 import { currentUser } from '../data/mockData';
 
@@ -11,6 +12,19 @@ export default function Navbar() {
     { id: 2, text: 'Payroll processing completed', time: '1 hour ago', unread: true },
     { id: 3, text: 'New task assigned to you', time: '2 hours ago', unread: false },
   ];
+
+  const handleLogout = async () => {
+    try {
+      await axios.post(`${import.meta.env.VITE_API_URL}/auth/logout`);
+    } catch (error) {
+      console.error("Logout failed:", error);
+    } finally {
+      localStorage.removeItem('token');
+      localStorage.removeItem('role');
+      localStorage.removeItem('user');
+      window.location.href = '/login';
+    }
+  };
 
   return (
     <nav className="bg-white border-b border-gray-200 px-6 py-4 sticky top-0 z-40">
@@ -90,7 +104,10 @@ export default function Navbar() {
                   <Settings className="w-4 h-4" />
                   Account Settings
                 </button>
-                <button className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 flex items-center gap-2">
+                <button 
+                  onClick={handleLogout}
+                  className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 flex items-center gap-2"
+                >
                   <LogOut className="w-4 h-4" />
                   Logout
                 </button>

@@ -12,6 +12,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
     const storedEmail = localStorage.getItem('rememberedEmail');
@@ -53,10 +54,16 @@ export default function Login() {
           localStorage.removeItem('rememberedPassword');
         }
 
-        // Redirect based on role
-        if (role === 'admin') navigate('/admin');
-        else if (role === 'manager') navigate('/manager');
-        else navigate('/employee');
+        // Show success transition
+        setShowSuccess(true);
+        
+        // Delay redirect to show the transition
+        setTimeout(() => {
+          // Redirect based on role
+          if (role === 'admin') navigate('/admin');
+          else if (role === 'manager') navigate('/manager');
+          else navigate('/employee');
+        }, 2000);
       }
     } catch (err: any) {
       if (err.response) {
@@ -90,7 +97,7 @@ export default function Login() {
                 Email Address
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 z-10" />
                 <input
                   type="email"
                   value={email}
@@ -107,7 +114,7 @@ export default function Login() {
                 Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 z-10" />
                 <input
                   type={showPassword ? "text" : "password"}
                   value={password}
@@ -119,7 +126,7 @@ export default function Login() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none cursor-pointer"
+                  className="absolute top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none cursor-pointer z-10"
                   style={{ right: '12px' }}
                 >
                   {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
@@ -158,6 +165,21 @@ export default function Login() {
           </p>
         </div>
       </div>
+
+      {/* Success GIF Transition Overlay */}
+      {showSuccess && (
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white transition-opacity duration-500">
+           {/* Replace this src with your actual GIF URL */}
+           <img 
+            src="https://cdn.dribbble.com/users/147386/screenshots/5315437/success-tick-dribbble.gif" 
+            alt="Success" 
+            className="w-64 h-64 object-contain"
+          />
+          <p className="mt-4 text-xl font-semibold text-gray-800 animate-pulse">
+            Login Successful...
+          </p>
+        </div>
+      )}
     </div>
   );
 }
