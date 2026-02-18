@@ -5,10 +5,15 @@ import Login from './pages/Login';
 import { RequireAuth } from './components/auth/RequireAuth';
 import { RoleBasedRedirect } from './components/auth/RoleBasedRedirect';
 import { UserManagement } from './pages/UserManagement';
+import UserForm from './pages/UserForm';
+import UserView from './pages/UserView';
 import { Attendance } from './pages/Attendance';
 import { Payroll } from './pages/Payroll';
 import { Settings } from './pages/Settings';
 import { PlaceholderPage } from './pages/PlaceholderPage';
+import DepartmentList from './pages/DepartmentList';
+import DesignationList from './pages/DesignationList';
+import LocationList from './pages/LocationList';
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +34,9 @@ export const router = createBrowserRouter([
           
           // User Management Routes
           { path: 'employees', Component: UserManagement },
+          { path: 'employees/create', Component: UserForm },
+          { path: 'employees/edit/:id', Component: UserForm },
+          { path: 'employees/view/:id', Component: UserView },
           { path: 'management', Component: PlaceholderPage },
           { path: 'ex-employees', Component: PlaceholderPage },
           { path: 'onboarding', Component: PlaceholderPage },
@@ -45,9 +53,9 @@ export const router = createBrowserRouter([
           { path: 'bulk-upload', Component: PlaceholderPage },
           
           // Departments Routes
-          { path: 'departments', Component: PlaceholderPage },
-          { path: 'designations', Component: PlaceholderPage },
-          { path: 'locations', Component: PlaceholderPage },
+          { path: 'departments', Component: DepartmentList },
+          { path: 'designations', Component: DesignationList },
+          { path: 'locations', Component: LocationList },
           
           // Attendance Routes
           { path: 'attendance', Component: Attendance },

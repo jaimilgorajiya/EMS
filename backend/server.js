@@ -8,6 +8,8 @@ import authRoutes from './routes/Auth.Routes.js';
 import userRoutes from './routes/User.Routes.js';
 import employmentTypeRoutes from './routes/EmploymentType.Routes.js';
 import departmentRoutes from './routes/Department.Routes.js';
+import designationRoutes from './routes/Designation.Routes.js';
+import locationRoutes from './routes/Location.Routes.js';
 import uploadRoutes from './routes/Upload.Routes.js';
 
 const app = express();
@@ -31,6 +33,8 @@ app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/employment-types', employmentTypeRoutes); 
 app.use('/api/departments', departmentRoutes);
+app.use('/api/designations', designationRoutes);
+app.use('/api/locations', locationRoutes);
 app.use('/api/upload', uploadRoutes);
 
 app.get('/', (req, res) => {
