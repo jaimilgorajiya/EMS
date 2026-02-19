@@ -21,7 +21,10 @@ import GradeList from './pages/user-management/GradeList';
 import ManagerList from './pages/user-management/ManagerList';
 import ExEmployeeList from './pages/user-management/ExEmployeeList';
 
-import OffboardingList from './pages/user-management/OffboardingList';
+import OffboardingDashboard from './pages/offboarding/OffboardingDashboard';
+import OffboardingList from './pages/offboarding/OffboardingList';
+import OffboardingDetail from './pages/offboarding/OffboardingDetail';
+import OffboardingInitiate from './pages/offboarding/OffboardingInitiate';
 import ResignationList from './pages/user-management/ResignationList';
 
 export const router = createBrowserRouter([
@@ -49,7 +52,10 @@ export const router = createBrowserRouter([
           { path: 'management', Component: ManagerList },
           { path: 'ex-employees', Component: ExEmployeeList },
           { path: 'onboarding', Component: UserForm },
-          { path: 'offboarding', Component: OffboardingList },
+          { path: 'offboarding', Component: OffboardingDashboard },
+          { path: 'offboarding/list', Component: OffboardingList },
+          { path: 'offboarding/process/:id', Component: OffboardingDetail },
+          { path: 'offboarding/initiate', Component: OffboardingInitiate },
           { path: 'roles', Component: RoleList },
           { path: 'levels', Component: GradeList },
           { path: 'profile-changes', Component: PlaceholderPage },
